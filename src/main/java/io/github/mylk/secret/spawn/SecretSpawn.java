@@ -10,12 +10,11 @@ public class SecretSpawn
     {
         // defining the options
         Options options = new Options();
-        CommandLineParser optionParser = new DefaultParser();
         CommandLine cmd = null;
-        Option secretLengthOption = new Option("length", true, "The secret's length");
-        options.addOption(secretLengthOption);
+        options.addOption("length", true, "The secret's length");
 
         // parse command options, show help when failing
+        CommandLineParser optionParser = new DefaultParser();
         try {
             cmd = optionParser.parse(options, args);
         } catch (ParseException ex) {
@@ -37,7 +36,7 @@ public class SecretSpawn
             System.exit(1);
         }
         if (cmd.hasOption("length")) {
-            secretLength = Integer.parseInt(secretLengthOption.getValue());
+            secretLength = Integer.parseInt(cmd.getOptionValue("length"));
         }
 
         // calling the source
