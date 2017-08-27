@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
+    }
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = '1.8'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+mainClassName = 'io.github.mylk.secret.spawn.SecretSpawn'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
+    compile group: 'org.json', name: 'json', version: '20170516'
+}
+
+jar {
+    baseName = 'secret-spawn'
+    version =  '0.1'
+    manifest {
+        attributes(
+            'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+            'Main-Class': 'io.github.mylk.secret.spawn.SecretSpawn'
+        )
+    }
+}
+
+run {
+    if (project.hasProperty('appArgs')) {
+        args Eval.me(appArgs)
+    }
+}
