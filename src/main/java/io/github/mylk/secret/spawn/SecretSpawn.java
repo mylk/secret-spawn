@@ -3,6 +3,7 @@ package io.github.mylk.secret.spawn;
 import org.apache.commons.cli.*;
 import io.github.mylk.secret.spawn.parser.Wikipedia;
 import io.github.mylk.secret.spawn.client.Rest;
+import io.github.mylk.secret.spawn.type.Source;
 
 public class SecretSpawn
 {
@@ -12,6 +13,7 @@ public class SecretSpawn
         Options cliOptions = new Options();
         CommandLine cmd = null;
         cliOptions.addOption("length", true, "The secret's length");
+        cliOptions.addOption("source", true, "The secret's source");
 
         // parse command options, show help when failing
         CommandLineParser optionParser = new DefaultParser();
@@ -28,7 +30,15 @@ public class SecretSpawn
         OptionsParser options = new OptionsParser(cmd);
         Integer secretLength = Integer.parseInt(options.getOption("secret.length", "length"));
 
-        String url = options.getFileOptionValue("source.url.wikipedia");
+        String source = options.getOption("secret.source", "source");
+        try {
+            Source.Type.valueOf(source.toUpperCase());
+        } catch (Exception ex) {
+            System.out.println("Phrase source not supported.");
+            System.exit(1);
+        }
+
+        String url = options.getFileOptionValue("source.url." + source.toLowerCase());
         if (url.isEmpty()) {
             System.out.println("The URL of the phrase source could not be found.");
             System.exit(1);
