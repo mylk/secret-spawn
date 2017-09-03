@@ -23,6 +23,7 @@ repositories {
 dependencies {
     compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
     compile group: 'org.json', name: 'json', version: '20170516'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.6'
 }
 
 jar {

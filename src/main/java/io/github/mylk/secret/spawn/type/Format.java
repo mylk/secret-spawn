@@ -1,6 +1,6 @@
 package io.github.mylk.secret.spawn.type;
 
-public class Secret
+public class Format
 {
     public enum Type {
         SIMPLE,

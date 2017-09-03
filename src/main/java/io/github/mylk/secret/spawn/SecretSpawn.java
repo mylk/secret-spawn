@@ -4,6 +4,7 @@ import org.apache.commons.cli.*;
 import io.github.mylk.secret.spawn.parser.Wikipedia;
 import io.github.mylk.secret.spawn.client.Rest;
 import io.github.mylk.secret.spawn.type.Source;
+import io.github.mylk.secret.spawn.type.Format;
 
 public class SecretSpawn
 {
@@ -13,7 +14,8 @@ public class SecretSpawn
         Options cliOptions = new Options();
         CommandLine cmd = null;
         cliOptions.addOption("length", true, "The secret's length");
-        cliOptions.addOption("source", true, "The secret's source");
+        cliOptions.addOption("source", true, "The secret's source [wikipedia]");
+        cliOptions.addOption("format", true, "The secret's forat [simple, hackish]");
 
         // parse command options, show help when failing
         CommandLineParser optionParser = new DefaultParser();
@@ -38,6 +40,14 @@ public class SecretSpawn
             System.exit(1);
         }
 
+        String secretFormat = options.getOption("secret.format", "format");
+        try {
+            Format.Type.valueOf(secretFormat.toUpperCase());
+        } catch (Exception ex) {
+            System.out.println("Secret type not supported.");
+            System.exit(1);
+        }
+
         String url = options.getFileOptionValue("source.url." + source.toLowerCase());
         if (url.isEmpty()) {
             System.out.println("The URL of the phrase source could not be found.");
@@ -59,15 +69,10 @@ public class SecretSpawn
         String content;
         Wikipedia responseParser = new Wikipedia();
         content = responseParser.parse(response);
+        Transformer transformer = new Transformer(secretFormat.toUpperCase());
 
         // create the secret
-        String phrase = content
-            .split("\\.")[0]
-            .trim()
-            .replaceAll("[^A-Za-z0-9 .]", "")
-            .replaceAll(" +", " ")
-            .replaceAll(" ", "_")
-            .toLowerCase()
+        String phrase = transformer.transform(content)
             .substring(0, secretLength);
         System.out.println(phrase);
     }
