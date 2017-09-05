@@ -1,6 +1,6 @@
 package io.github.mylk.secret.spawn;
 
-import io.github.mylk.secret.spawn.type.Format;
+import io.github.mylk.secret.spawn.enums.Format;
 import org.apache.commons.lang3.text.WordUtils;
 
 public class Transformer
@@ -14,9 +14,9 @@ public class Transformer
 
     public String transform(String phrase)
     {
-        if (secretFormat.equals(Format.Type.SIMPLE.name())) {
+        if (secretFormat.equals(Format.SIMPLE.name())) {
             return transformSimple(phrase);
-        } else if (secretFormat.equals(Format.Type.HACKISH.name())) {
+        } else if (secretFormat.equals(Format.HACKISH.name())) {
             return transformHackish(phrase);
         }
 

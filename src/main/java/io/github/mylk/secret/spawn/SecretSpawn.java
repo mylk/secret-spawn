@@ -3,8 +3,8 @@ package io.github.mylk.secret.spawn;
 import org.apache.commons.cli.*;
 import io.github.mylk.secret.spawn.parser.Wikipedia;
 import io.github.mylk.secret.spawn.client.Rest;
-import io.github.mylk.secret.spawn.type.Source;
-import io.github.mylk.secret.spawn.type.Format;
+import io.github.mylk.secret.spawn.enums.Source;
+import io.github.mylk.secret.spawn.enums.Format;
 
 public class SecretSpawn
 {
@@ -34,7 +34,7 @@ public class SecretSpawn
 
         String source = options.getOption("secret.source", "source");
         try {
-            Source.Type.valueOf(source.toUpperCase());
+            Source.valueOf(source.toUpperCase());
         } catch (Exception ex) {
             System.out.println("Phrase source not supported.");
             System.exit(1);
@@ -42,7 +42,7 @@ public class SecretSpawn
 
         String secretFormat = options.getOption("secret.format", "format");
         try {
-            Format.Type.valueOf(secretFormat.toUpperCase());
+            Format.valueOf(secretFormat.toUpperCase());
         } catch (Exception ex) {
             System.out.println("Secret type not supported.");
             System.exit(1);
