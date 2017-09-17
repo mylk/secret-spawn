@@ -15,7 +15,7 @@ public class SecretSpawn
         CommandLine cmd = null;
         cliOptions.addOption("length", true, "The secret's length");
         cliOptions.addOption("source", true, "The secret's source [wikipedia]");
-        cliOptions.addOption("format", true, "The secret's forat [simple, hackish]");
+        cliOptions.addOption("format", true, "The secret's format [simple, hackish]");
 
         // parse command options, show help when failing
         CommandLineParser optionParser = new DefaultParser();

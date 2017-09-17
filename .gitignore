@@ -2,3 +2,4 @@
 build/
 !gradle-wrapper.jar
 .nb-gradle/
+.idea/
