@@ -43,8 +43,9 @@ public class SecretSpawn
         }
 
         String secretFormat = options.getOption("secret.format", "format");
+        Format format = null;
         try {
-            Format.valueOf(secretFormat.toUpperCase());
+            format = Format.valueOf(secretFormat.toUpperCase());
         } catch (Exception ex) {
             System.out.println("Secret type not supported.");
             System.exit(1);
@@ -71,7 +72,7 @@ public class SecretSpawn
         String content;
         Wikipedia responseParser = new Wikipedia();
         content = responseParser.parse(response);
-        Transformer transformer = new Transformer(secretFormat.toUpperCase());
+        Transformer transformer = new Transformer(format);
 
         // create the secret
         String phrase = transformer.transform(content)

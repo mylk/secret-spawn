@@ -5,18 +5,21 @@ import org.apache.commons.lang3.text.WordUtils;
 
 public class Transformer
 {
-    private String secretFormat = "";
+    private Format format;
 
-    public Transformer(String type)
+    public Transformer(Format format)
     {
-        secretFormat = type;
+        this.format = format;
     }
 
     public String transform(String phrase)
     {
-        if (secretFormat.equals(Format.SIMPLE.name())) {
+        String[] phrases = phrase.split("\\.");
+        phrase = transformCommon(phrases[0]);
+
+        if (format.equals(Format.SIMPLE)) {
             return transformSimple(phrase);
-        } else if (secretFormat.equals(Format.HACKISH.name())) {
+        } else if (format.equals(Format.HACKISH)) {
             return transformHackish(phrase);
         }
 
@@ -26,7 +29,6 @@ public class Transformer
     private String transformCommon(String phrase)
     {
         return phrase
-            .split("\\.")[0]
             .trim()
             .replaceAll("\\(.*\\)", "")
             .replaceAll("[^A-Za-z0-9 .]", "")
@@ -35,15 +37,13 @@ public class Transformer
 
     private String transformSimple(String phrase)
     {
-        return
-            transformCommon(phrase)
+        return phrase
             .replaceAll(" ", "_")
             .toLowerCase();
     }
 
     private String transformHackish(String phrase)
     {
-        phrase = transformCommon(phrase);
         phrase = WordUtils.capitalizeFully(phrase);
 
         phrase = phrase
