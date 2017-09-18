@@ -1,4 +1,4 @@
-package io.github.mylk.secret.spawn;
+package io.github.mylk.secret.spawn.service.common;
 
 import io.github.mylk.secret.spawn.enums.Format;
 import org.apache.commons.lang3.text.WordUtils;

@@ -1,4 +1,4 @@
-package io.github.mylk.secret.spawn;
+package io.github.mylk.secret.spawn.service.common;
 
 import java.io.IOException;
 import java.io.InputStream;

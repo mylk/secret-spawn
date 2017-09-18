@@ -1,8 +1,10 @@
 package io.github.mylk.secret.spawn;
 
+import io.github.mylk.secret.spawn.service.common.OptionsParser;
+import io.github.mylk.secret.spawn.service.common.Transformer;
 import org.apache.commons.cli.*;
-import io.github.mylk.secret.spawn.parser.Wikipedia;
-import io.github.mylk.secret.spawn.client.Rest;
+import io.github.mylk.secret.spawn.service.parser.Wikipedia;
+import io.github.mylk.secret.spawn.service.client.Rest;
 import io.github.mylk.secret.spawn.enums.Source;
 import io.github.mylk.secret.spawn.enums.Format;
 

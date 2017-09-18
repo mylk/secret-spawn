@@ -1,4 +1,4 @@
-package io.github.mylk.secret.spawn.parser;
+package io.github.mylk.secret.spawn.service.parser;
 
 import org.json.*;
 import java.util.Iterator;
