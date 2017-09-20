@@ -1,6 +1,6 @@
 package io.github.mylk.secret.spawn;
 
-import io.github.mylk.secret.spawn.service.common.OptionsParser;
+import io.github.mylk.secret.spawn.service.common.OptionsReader;
 import io.github.mylk.secret.spawn.service.common.Transformer;
 import org.apache.commons.cli.*;
 import io.github.mylk.secret.spawn.service.parser.Wikipedia;
@@ -30,11 +30,16 @@ public class SecretSpawn
             System.exit(1);
         }
 
-        // getting config options (cli or configuration file options)
-        OptionsParser options = new OptionsParser(cmd);
-        Integer secretLength = Integer.parseInt(options.getOption("secret.length", "length"));
+        OptionsReader options = new OptionsReader();
 
-        String source = options.getOption("secret.source", "source");
+        // getting config options (cli or configuration file options)
+        Integer secretLength = cmd.hasOption("length") ?
+                Integer.parseInt(cmd.getOptionValue("length"))
+                : Integer.parseInt(options.getOptionValue("secret.length"));
+
+        String source = cmd.hasOption("source")
+                ? cmd.getOptionValue("source")
+                : options.getOptionValue("secret.source");
         try {
             Source.valueOf(source.toUpperCase());
         } catch (Exception ex) {
@@ -42,7 +47,9 @@ public class SecretSpawn
             System.exit(1);
         }
 
-        String secretFormat = options.getOption("secret.format", "format");
+        String secretFormat = cmd.hasOption("format")
+                ? cmd.getOptionValue("format")
+                : options.getOptionValue("secret.format");
         Format format = null;
         try {
             format = Format.valueOf(secretFormat.toUpperCase());
@@ -51,7 +58,7 @@ public class SecretSpawn
             System.exit(1);
         }
 
-        String url = options.getFileOptionValue("source.url." + source.toLowerCase());
+        String url = options.getOptionValue("source.url." + source.toLowerCase());
         if (url.isEmpty()) {
             System.out.println("The URL of the phrase source could not be found.");
             System.exit(1);
