@@ -6,16 +6,24 @@ import org.apache.commons.lang3.text.WordUtils;
 public class Transformer
 {
     private Format format;
+    private Boolean extraRandom;
 
-    public Transformer(Format format)
+    public Transformer(Format format, Boolean extraRandom)
     {
         this.format = format;
+        this.extraRandom = extraRandom;
     }
 
     public String transform(String phrase)
     {
         String[] phrases = phrase.split("\\.");
-        phrase = transformCommon(phrases[0]);
+        if (extraRandom) {
+            phrase = phrases[(int) (Math.random() * (phrases.length - 1))];
+        } else {
+            phrase = phrases[0];
+        }
+
+        phrase = transformCommon(phrase);
 
         if (format.equals(Format.SIMPLE)) {
             return transformSimple(phrase);

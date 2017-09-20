@@ -18,6 +18,7 @@ public class SecretSpawn
         cliOptions.addOption("length", true, "The secret's length");
         cliOptions.addOption("source", true, "The secret's source [wikipedia]");
         cliOptions.addOption("format", true, "The secret's format [simple, hackish]");
+        cliOptions.addOption("extraRandom", false, "Pick a random phrase out of a paragraph");
 
         // parse command options, show help when failing
         CommandLineParser optionParser = new DefaultParser();
@@ -79,7 +80,9 @@ public class SecretSpawn
         String content;
         Wikipedia responseParser = new Wikipedia();
         content = responseParser.parse(response);
-        Transformer transformer = new Transformer(format);
+
+        Boolean extraRandom = cmd.hasOption("extraRandom");
+        Transformer transformer = new Transformer(format, extraRandom);
 
         // create the secret
         String phrase = transformer.transform(content)
