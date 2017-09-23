@@ -3,11 +3,10 @@ package io.github.mylk.secret.spawn.service.parser;
 import org.json.*;
 import java.util.Iterator;
 
-public class Wikipedia
-{
+public class WikipediaParser implements Parser {
     public String parse(String json)
     {
-        String content = "";
+        String content;
 
         JSONObject jsonObj = new JSONObject(json);
         JSONObject pagesElement = jsonObj.getJSONObject("query").getJSONObject("pages");

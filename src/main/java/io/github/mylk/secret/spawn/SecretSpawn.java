@@ -1,15 +1,14 @@
 package io.github.mylk.secret.spawn;
 
-import io.github.mylk.secret.spawn.service.common.OptionsReader;
-import io.github.mylk.secret.spawn.service.common.Transformer;
 import org.apache.commons.cli.*;
-import io.github.mylk.secret.spawn.service.parser.Wikipedia;
+import io.github.mylk.secret.spawn.service.common.OptionsReader;
+import io.github.mylk.secret.spawn.service.transformer.TransformerFactory;
+import io.github.mylk.secret.spawn.service.transformer.Transformer;
+import io.github.mylk.secret.spawn.service.parser.ParserFactory;
+import io.github.mylk.secret.spawn.service.parser.Parser;
 import io.github.mylk.secret.spawn.service.client.Rest;
-import io.github.mylk.secret.spawn.enums.Source;
-import io.github.mylk.secret.spawn.enums.Format;
 
-public class SecretSpawn
-{
+public class SecretSpawn {
     public static void main(String[] args)
     {
         // defining the options
@@ -33,31 +32,22 @@ public class SecretSpawn
 
         OptionsReader options = new OptionsReader();
 
-        // getting config options (cli or configuration file options)
-        Integer secretLength = cmd.hasOption("length") ?
-                Integer.parseInt(cmd.getOptionValue("length"))
-                : Integer.parseInt(options.getOptionValue("secret.length"));
+        // getting config options and instantiate objects
+        Integer secretLength = cmd.hasOption("length")
+            ? Integer.parseInt(cmd.getOptionValue("length"))
+            : Integer.parseInt(options.getOptionValue("secret.length"));
 
         String source = cmd.hasOption("source")
-                ? cmd.getOptionValue("source")
-                : options.getOptionValue("secret.source");
-        try {
-            Source.valueOf(source.toUpperCase());
-        } catch (Exception ex) {
-            System.out.println("Phrase source not supported.");
-            System.exit(1);
-        }
+            ? cmd.getOptionValue("source")
+            : options.getOptionValue("secret.source");
+        ParserFactory parserFactory = new ParserFactory();
+        Parser responseParser = parserFactory.getParser(source);
 
-        String secretFormat = cmd.hasOption("format")
-                ? cmd.getOptionValue("format")
-                : options.getOptionValue("secret.format");
-        Format format = null;
-        try {
-            format = Format.valueOf(secretFormat.toUpperCase());
-        } catch (Exception ex) {
-            System.out.println("Secret type not supported.");
-            System.exit(1);
-        }
+        String format = cmd.hasOption("format")
+            ? cmd.getOptionValue("format")
+            : options.getOptionValue("secret.format");
+        TransformerFactory transformerFactory = new TransformerFactory();
+        Transformer transformer = transformerFactory.getTransformer(format);
 
         String url = options.getOptionValue("source.url." + source.toLowerCase());
         if (url.isEmpty()) {
@@ -77,16 +67,14 @@ public class SecretSpawn
         }
 
         // parse the response
-        String content;
-        Wikipedia responseParser = new Wikipedia();
-        content = responseParser.parse(response);
-
-        Boolean extraRandom = cmd.hasOption("extraRandom");
-        Transformer transformer = new Transformer(format, extraRandom);
+        String content = responseParser.parse(response);
 
         // create the secret
-        String phrase = transformer.transform(content)
-            .substring(0, secretLength);
+        Boolean extraRandom = cmd.hasOption("extraRandom");
+        String phrase = transformer
+            .setExtraRandom(extraRandom)
+            .setSecretLength(secretLength)
+            .transform(content);
         System.out.println(phrase);
     }
 }

@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class OptionsReader
-{
+public class OptionsReader {
     private final String PROPERTIES_FILENAME = "config.properties";
 
     private final static Properties FILE_OPTIONS = new Properties();

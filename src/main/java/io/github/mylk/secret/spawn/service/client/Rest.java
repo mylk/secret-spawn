@@ -5,8 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Rest
-{
+public class Rest {
     private final String USER_AGENT = "Mozilla/5.0";
 
     public String get(String url) throws Exception
