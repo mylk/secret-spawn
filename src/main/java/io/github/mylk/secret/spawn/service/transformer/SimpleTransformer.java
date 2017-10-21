@@ -1,15 +1,17 @@
 package io.github.mylk.secret.spawn.service.transformer;
 
+import io.github.mylk.secret.spawn.model.Secret;
+
 public class SimpleTransformer extends Transformer {
-    public String transform(String phrase)
+    public Secret transform(Secret secret)
     {
-        phrase = before(phrase);
+        String phrase = before(secret.getContentPlain());
 
         phrase = phrase
             .replaceAll(" ", "_")
             .toLowerCase();
 
-        phrase = after(phrase);
-        return phrase;
+        secret.setContentTransformed(after(phrase));
+        return secret;
     }
 }

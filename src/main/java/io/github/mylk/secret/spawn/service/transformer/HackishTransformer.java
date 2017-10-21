@@ -1,11 +1,12 @@
 package io.github.mylk.secret.spawn.service.transformer;
 
+import io.github.mylk.secret.spawn.model.Secret;
 import org.apache.commons.lang3.text.WordUtils;
 
 public class HackishTransformer extends Transformer {
-    public String transform(String phrase)
+    public Secret transform(Secret secret)
     {
-        phrase = before(phrase);
+        String phrase = before(secret.getContentPlain());
         phrase = WordUtils.capitalizeFully(phrase);
 
         phrase = phrase
@@ -16,7 +17,7 @@ public class HackishTransformer extends Transformer {
             .replaceAll("s", "\\$")
             .replaceAll("o", "0");
 
-        phrase = after(phrase);
-        return phrase;
+        secret.setContentTransformed(after(phrase));
+        return secret;
     }
 }

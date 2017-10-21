@@ -7,6 +7,7 @@ import io.github.mylk.secret.spawn.service.transformer.Transformer;
 import io.github.mylk.secret.spawn.service.parser.ParserFactory;
 import io.github.mylk.secret.spawn.service.parser.Parser;
 import io.github.mylk.secret.spawn.service.client.Rest;
+import io.github.mylk.secret.spawn.model.Secret;
 
 public class SecretSpawn {
     public static void main(String[] args)
@@ -40,20 +41,25 @@ public class SecretSpawn {
         String source = cmd.hasOption("source")
             ? cmd.getOptionValue("source")
             : options.getOptionValue("secret.source");
-        ParserFactory parserFactory = new ParserFactory();
-        Parser responseParser = parserFactory.getParser(source);
 
         String format = cmd.hasOption("format")
             ? cmd.getOptionValue("format")
             : options.getOptionValue("secret.format");
-        TransformerFactory transformerFactory = new TransformerFactory();
-        Transformer transformer = transformerFactory.getTransformer(format);
 
         String url = options.getOptionValue("source.url." + source.toLowerCase());
         if (url.isEmpty()) {
             System.out.println("The URL of the phrase source could not be found.");
             System.exit(1);
         }
+
+        Boolean extraRandom = cmd.hasOption("extraRandom");
+
+        // instantiate stuff
+        ParserFactory parserFactory = new ParserFactory();
+        Parser responseParser = parserFactory.getParser(source);
+
+        TransformerFactory transformerFactory = new TransformerFactory();
+        Transformer transformer = transformerFactory.getTransformer(format);
 
         // calling the source
         String response;
@@ -67,14 +73,18 @@ public class SecretSpawn {
         }
 
         // parse the response
-        String content = responseParser.parse(response);
+        Secret secret = new Secret();
+        secret = responseParser.parse(response, secret);
 
-        // create the secret
-        Boolean extraRandom = cmd.hasOption("extraRandom");
-        String phrase = transformer
+        // create the secret string
+        secret = transformer
             .setExtraRandom(extraRandom)
             .setSecretLength(secretLength)
-            .transform(content);
-        System.out.println(phrase);
+            .transform(secret);
+
+        System.out.printf("Secret:%n%s%n%n", secret.getContentTransformed());
+        System.out.printf("Title:%n%s%n%n", secret.getTitle());
+        System.out.printf("Original content:%n%s%n%n", secret.getContentPlain());
+        System.out.printf("URL:%n%s%n%n", secret.getUrl());
     }
 }

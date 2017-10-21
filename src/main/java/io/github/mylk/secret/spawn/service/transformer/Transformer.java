@@ -1,10 +1,12 @@
 package io.github.mylk.secret.spawn.service.transformer;
 
+import io.github.mylk.secret.spawn.model.Secret;
+
 public abstract class Transformer {
     private Boolean extraRandom;
     private Integer secretLength;
 
-    public abstract String transform(String phrase);
+    public abstract Secret transform(Secret secret);
 
     public Transformer setExtraRandom(Boolean extraRandom)
     {
