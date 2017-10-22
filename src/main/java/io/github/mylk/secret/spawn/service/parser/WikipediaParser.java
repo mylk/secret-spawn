@@ -5,8 +5,7 @@ import java.util.Iterator;
 import io.github.mylk.secret.spawn.model.Secret;
 
 public class WikipediaParser implements Parser {
-    public Secret parse(String json, Secret secret)
-    {
+    public Secret parse(String json, Secret secret) {
         JSONObject jsonObj = new JSONObject(json);
         JSONObject pagesElement = jsonObj.getJSONObject("query").getJSONObject("pages");
 

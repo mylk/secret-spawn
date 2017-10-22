@@ -8,8 +8,7 @@ import java.net.URL;
 public class Rest {
     private final String USER_AGENT = "Mozilla/5.0";
 
-    public String get(String url) throws Exception
-    {
+    public String get(String url) throws Exception {
         URL urlObj = new URL(url);
         HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
 

@@ -1,29 +1,20 @@
 package io.github.mylk.secret.spawn.service.transformer;
 
 import io.github.mylk.secret.spawn.model.Secret;
+import io.github.mylk.secret.spawn.model.Settings;
 
 public abstract class Transformer {
-    private Boolean extraRandom;
-    private Integer secretLength;
+    private Settings settings;
 
     public abstract Secret transform(Secret secret);
 
-    public Transformer setExtraRandom(Boolean extraRandom)
-    {
-        this.extraRandom = extraRandom;
-        return this;
+    public Transformer(Settings settings) {
+        this.settings = settings;
     }
 
-    public Transformer setSecretLength(Integer secretLength)
-    {
-        this.secretLength = secretLength;
-        return this;
-    }
-
-    public String before(String phrase)
-    {
+    public String before(String phrase) {
         String[] phrases = phrase.split("\\.");
-        if (extraRandom) {
+        if (settings.isTooRandom()) {
             phrase = phrases[(int) (Math.random() * (phrases.length - 1))];
         } else {
             phrase = phrases[0];
@@ -38,6 +29,6 @@ public abstract class Transformer {
 
     public String after(String phrase)
     {
-        return phrase.substring(0, secretLength);
+        return phrase.substring(0, settings.getLength());
     }
 }

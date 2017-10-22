@@ -1,9 +1,14 @@
 package io.github.mylk.secret.spawn.service.transformer;
 
 import io.github.mylk.secret.spawn.model.Secret;
+import io.github.mylk.secret.spawn.model.Settings;
 import org.apache.commons.lang3.text.WordUtils;
 
 public class HackishTransformer extends Transformer {
+    public HackishTransformer(Settings settings) {
+        super(settings);
+    }
+
     public Secret transform(Secret secret)
     {
         String phrase = before(secret.getContentPlain());

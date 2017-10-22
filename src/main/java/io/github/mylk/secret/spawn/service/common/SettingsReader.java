@@ -1,16 +1,17 @@
 package io.github.mylk.secret.spawn.service.common;
 
+import io.github.mylk.secret.spawn.Exception.SettingNotFoundException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class OptionsReader {
+public class SettingsReader {
     private final String PROPERTIES_FILENAME = "config.properties";
 
     private final static Properties FILE_OPTIONS = new Properties();
 
-    public OptionsReader()
-    {
+    public SettingsReader() {
         if (FILE_OPTIONS.isEmpty()) {
             InputStream inputStream = getClass().getClassLoader().getResourceAsStream(PROPERTIES_FILENAME);
             if (inputStream != null) {
@@ -25,13 +26,13 @@ public class OptionsReader {
         }
     }
 
-    public String getOptionValue(String property)
-    {
-        String value = "";
+    public String getOptionValue(String property) throws SettingNotFoundException {
+        String value;
 
         try {
             value = FILE_OPTIONS.getProperty(property);
         } catch (Exception ex) {
+            throw new SettingNotFoundException(ex);
         }
 
         return value;

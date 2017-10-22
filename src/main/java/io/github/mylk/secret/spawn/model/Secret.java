@@ -12,7 +12,6 @@ public class Secret {
 
     public Secret setTitle(String title) {
         this.title = title;
-
         return this;
     }
 
@@ -22,7 +21,6 @@ public class Secret {
 
     public Secret setContentPlain(String contentPlain) {
         this.contentPlain = contentPlain;
-
         return this;
     }
 
@@ -32,7 +30,6 @@ public class Secret {
 
     public Secret setContentTransformed(String contentTransformed) {
         this.contentTransformed = contentTransformed;
-
         return this;
     }
 
@@ -42,7 +39,6 @@ public class Secret {
 
     public Secret setUrl(String url) {
         this.url = url;
-
         return this;
     }
 }
