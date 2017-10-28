@@ -9,18 +9,17 @@ public class HackishTransformer extends Transformer {
         super(settings);
     }
 
-    public Secret transform(Secret secret)
-    {
+    public Secret transform(Secret secret) {
         String phrase = before(secret.getContentPlain());
         phrase = WordUtils.capitalizeFully(phrase);
 
         phrase = phrase
-            .replaceAll(" ", "")
-            .replaceAll("a", "\\@")
-            .replaceAll("e", "3")
-            .replaceAll("i", "1")
-            .replaceAll("s", "\\$")
-            .replaceAll("o", "0");
+                .replaceAll(" ", "")
+                .replaceAll("a", "\\@")
+                .replaceAll("e", "3")
+                .replaceAll("i", "1")
+                .replaceAll("s", "\\$")
+                .replaceAll("o", "0");
 
         secret.setContentTransformed(after(phrase));
         return secret;

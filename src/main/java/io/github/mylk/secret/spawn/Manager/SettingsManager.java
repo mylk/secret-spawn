@@ -18,43 +18,34 @@ public class SettingsManager {
 
     public Settings parse(String[] args) throws ParseException, SettingNotFoundException {
         Settings settings = new Settings();
-        CommandLine cmd = null;
+        CommandLine cmd;
 
-        // parse command options, show help when failing
+        // parse cli settings
         CommandLineParser optionParser = new DefaultParser();
         cmd = optionParser.parse(options, args);
 
+        // used to read default settings from config file
         SettingsReader settingsReader = new SettingsReader();
 
-        Integer length;
-        String source;
-        String format;
-        String url;
-        Boolean tooRandom;
-        try {
-            length = cmd.hasOption("length")
-                    ? Integer.parseInt(cmd.getOptionValue("length"))
-                    : Integer.parseInt(settingsReader.getOptionValue("secret.length"));
+        Integer length = cmd.hasOption("length")
+                ? Integer.parseInt(cmd.getOptionValue("length"))
+                : Integer.parseInt(settingsReader.getOptionValue("secret.length"));
 
-            source = cmd.hasOption("source")
-                    ? cmd.getOptionValue("source")
-                    : settingsReader.getOptionValue("secret.source");
+        String source = cmd.hasOption("source")
+                ? cmd.getOptionValue("source")
+                : settingsReader.getOptionValue("secret.source");
 
-            format = cmd.hasOption("format")
-                    ? cmd.getOptionValue("format")
-                    : settingsReader.getOptionValue("secret.format");
+        String format = cmd.hasOption("format")
+                ? cmd.getOptionValue("format")
+                : settingsReader.getOptionValue("secret.format");
 
-            url = settingsReader.getOptionValue("source.url." + source.toLowerCase());
-            if (url == null || url.isEmpty()) {
-                String message = "The URL of the phrase source could not be found.";
-                SettingNotFoundException ex = new SettingNotFoundException(message);
-                throw ex;
-            }
-
-            tooRandom = cmd.hasOption("tooRandom");
-        } catch (Exception ex) {
-            throw new SettingNotFoundException(ex);
+        String url = settingsReader.getOptionValue("source.url." + source.toLowerCase());
+        if (url == null || url.isEmpty()) {
+            String message = "The URL of the phrase source could not be found.";
+            throw new SettingNotFoundException(message);
         }
+
+        Boolean tooRandom = cmd.hasOption("tooRandom");
 
         settings.setLength(length)
                 .setSource(source)

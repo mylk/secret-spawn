@@ -21,14 +21,13 @@ public abstract class Transformer {
         }
 
         return phrase
-            .trim()
-            .replaceAll("\\(.*\\)", "")
-            .replaceAll("[^A-Za-z0-9 .]", "")
-            .replaceAll(" +", " ");
+                .trim()
+                .replaceAll("\\(.*\\)", "")
+                .replaceAll("[^A-Za-z0-9 .]", "")
+                .replaceAll(" +", " ");
     }
 
-    public String after(String phrase)
-    {
+    public String after(String phrase) {
         return phrase.substring(0, settings.getLength());
     }
 }

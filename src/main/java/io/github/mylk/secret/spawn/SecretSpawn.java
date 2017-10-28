@@ -1,6 +1,7 @@
 package io.github.mylk.secret.spawn;
 
 import io.github.mylk.secret.spawn.Exception.SettingNotFoundException;
+import io.github.mylk.secret.spawn.Exception.SourceCallException;
 import io.github.mylk.secret.spawn.Manager.SettingsManager;
 import io.github.mylk.secret.spawn.Manager.SpawnManager;
 import io.github.mylk.secret.spawn.model.Settings;
@@ -13,7 +14,7 @@ public class SecretSpawn {
         SettingsManager settingsManager = new SettingsManager();
         settingsManager.defineOptions();
 
-        // parse cli options
+        // parse settings
         Settings settings = new Settings();
         try {
             settings = settingsManager.parse(args);
@@ -27,10 +28,15 @@ public class SecretSpawn {
             System.exit(1);
         }
 
-
         SpawnManager spawnManager = new SpawnManager();
         spawnManager.setSettings(settings);
-        Secret secret = spawnManager.spawn();
+        Secret secret = new Secret();
+        try {
+            secret = spawnManager.spawn();
+        } catch (SourceCallException ex) {
+            System.out.println(ex.getMessage());
+            System.exit(1);
+        }
 
         System.out.printf("Secret:%n%s%n%n", secret.getContentTransformed());
         System.out.printf("Title:%n%s%n%n", secret.getTitle());

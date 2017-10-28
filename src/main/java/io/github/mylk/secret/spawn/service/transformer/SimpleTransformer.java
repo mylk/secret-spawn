@@ -12,8 +12,8 @@ public class SimpleTransformer extends Transformer {
         String phrase = before(secret.getContentPlain());
 
         phrase = phrase
-            .replaceAll(" ", "_")
-            .toLowerCase();
+                .replaceAll(" ", "_")
+                .toLowerCase();
 
         secret.setContentTransformed(after(phrase));
         return secret;
