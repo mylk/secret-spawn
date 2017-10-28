@@ -2,7 +2,6 @@ package io.github.mylk.secret.spawn.service.transformer;
 
 import io.github.mylk.secret.spawn.enums.Format;
 import io.github.mylk.secret.spawn.model.Settings;
-import org.apache.commons.lang3.NotImplementedException;
 
 public class TransformerFactory {
     private Settings settings;
@@ -12,14 +11,12 @@ public class TransformerFactory {
     }
 
     public Transformer getTransformer() {
-        Transformer transformer;
+        Transformer transformer = null;
 
         if (settings.getFormat().toUpperCase().equals(Format.SIMPLE.name())) {
             transformer = new SimpleTransformer(settings);
         } else if (settings.getFormat().toUpperCase().equals(Format.HACKISH.name())) {
             transformer = new HackishTransformer(settings);
-        } else {
-            throw new NotImplementedException("Format not implemented yet.");
         }
 
         return transformer;

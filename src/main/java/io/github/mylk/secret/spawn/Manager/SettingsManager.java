@@ -3,7 +3,9 @@ package io.github.mylk.secret.spawn.Manager;
 import io.github.mylk.secret.spawn.Exception.SettingNotFoundException;
 import io.github.mylk.secret.spawn.model.Settings;
 import io.github.mylk.secret.spawn.service.common.SettingsReader;
+import io.github.mylk.secret.spawn.service.common.SettingsValidator;
 import org.apache.commons.cli.*;
+import org.apache.commons.lang3.NotImplementedException;
 
 public class SettingsManager {
     private Options options;
@@ -16,7 +18,7 @@ public class SettingsManager {
         options.addOption("tooRandom", false, "Pick a random phrase out of a paragraph");
     }
 
-    public Settings parse(String[] args) throws ParseException, SettingNotFoundException {
+    public Settings parse(String[] args) throws ParseException, SettingNotFoundException, NotImplementedException {
         Settings settings = new Settings();
         CommandLine cmd;
 
@@ -40,10 +42,6 @@ public class SettingsManager {
                 : settingsReader.getOptionValue("secret.format");
 
         String url = settingsReader.getOptionValue("source.url." + source.toLowerCase());
-        if (url == null || url.isEmpty()) {
-            String message = "The URL of the phrase source could not be found.";
-            throw new SettingNotFoundException(message);
-        }
 
         Boolean tooRandom = cmd.hasOption("tooRandom");
 
@@ -52,6 +50,8 @@ public class SettingsManager {
                 .setFormat(format)
                 .setUrl(url)
                 .setIsTooRandom(tooRandom);
+
+        SettingsValidator.validate(settings);
 
         return settings;
     }

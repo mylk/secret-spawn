@@ -8,6 +8,7 @@ import io.github.mylk.secret.spawn.model.Settings;
 import io.github.mylk.secret.spawn.model.Secret;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.ParseException;
+import org.apache.commons.lang3.NotImplementedException;
 
 public class SecretSpawn {
     public static void main(String[] args) {
@@ -24,6 +25,9 @@ public class SecretSpawn {
             System.out.println(ex.getMessage());
             System.exit(1);
         } catch (SettingNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            System.exit(1);
+        } catch (NotImplementedException ex) {
             System.out.println(ex.getMessage());
             System.exit(1);
         }
