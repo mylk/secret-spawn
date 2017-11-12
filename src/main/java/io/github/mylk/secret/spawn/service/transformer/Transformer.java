@@ -15,23 +15,8 @@ public abstract class Transformer {
         this.settings = settings;
     }
 
-    public Secret before(Secret secret) {
-        String phrase = pickPhrase(secret.getContentPlain());
-
-        phrase = phrase
-                .trim()
-                .replaceAll(" +", " ");
-
-        secret.setContentPlain(phrase);
-        return secret;
-    }
-
-    public String after(String phrase) {
-        return phrase;
-    }
-
-    private String pickPhrase(String content) {
-        String[] phrases = content.split("\\.");
+    public Secret preparePhrase(Secret secret) {
+        String[] phrases = secret.getContentPlain().split("\\.");
 
         // pick the first or a random phrase
         int phrasePosition = 0;
@@ -40,6 +25,19 @@ public abstract class Transformer {
         }
         String phrase = phrases[phrasePosition];
 
+        phrase = phrase
+                .replaceAll("\\(.*\\)", "")
+                .replaceAll("[^A-Za-z0-9 .]", "")
+                .replaceAll(" +", " ")
+                .trim();
+
+        phrase = prepareWords(phrase);
+
+        secret.setContentPlain(phrase);
+        return secret;
+    }
+
+    private String prepareWords(String phrase) {
         // cut the phrase as close to the requested length
         List<String> words = new ArrayList<>(Arrays.asList(phrase.split(" ")));
         List<String> wordsSelected = new ArrayList<>();
@@ -49,12 +47,9 @@ public abstract class Transformer {
                 break;
             }
 
-            word = word
-                    .replaceAll("\\(.*\\)", "")
-                    .replaceAll("[^A-Za-z0-9 .]", "");
             wordsSelected.add(word);
 
-            wordsSelectedLength += word.length() + 1;
+            wordsSelectedLength += word.length();
         }
 
         phrase = String.join(" ", wordsSelected);

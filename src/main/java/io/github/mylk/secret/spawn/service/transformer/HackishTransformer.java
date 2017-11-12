@@ -10,7 +10,7 @@ public class HackishTransformer extends Transformer {
     }
 
     public Secret transform(Secret secret) {
-        secret = before(secret);
+        secret = preparePhrase(secret);
         String phrase = WordUtils.capitalizeFully(secret.getContentPlain());
 
         phrase = phrase
@@ -21,7 +21,7 @@ public class HackishTransformer extends Transformer {
                 .replaceAll("s", "\\$")
                 .replaceAll("o", "0");
 
-        secret.setContentTransformed(after(phrase));
+        secret.setContentTransformed(phrase);
         return secret;
     }
 }

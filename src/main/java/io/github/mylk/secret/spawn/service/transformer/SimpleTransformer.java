@@ -9,14 +9,14 @@ public class SimpleTransformer extends Transformer {
     }
 
     public Secret transform(Secret secret) {
-        secret = before(secret);
+        secret = preparePhrase(secret);
 
         String phrase = secret.getContentPlain()
                 .replaceAll("(^ )|( $)", "")
                 .replaceAll(" ", "_")
                 .toLowerCase();
 
-        secret.setContentTransformed(after(phrase));
+        secret.setContentTransformed(phrase);
         return secret;
     }
 }
