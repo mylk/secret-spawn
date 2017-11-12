@@ -9,9 +9,10 @@ public class SimpleTransformer extends Transformer {
     }
 
     public Secret transform(Secret secret) {
-        String phrase = before(secret.getContentPlain());
+        secret = before(secret);
 
-        phrase = phrase
+        String phrase = secret.getContentPlain()
+                .replaceAll("(^ )|( $)", "")
                 .replaceAll(" ", "_")
                 .toLowerCase();
 

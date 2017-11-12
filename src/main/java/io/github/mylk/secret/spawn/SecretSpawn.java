@@ -43,8 +43,7 @@ public class SecretSpawn {
         }
 
         System.out.printf("Secret:%n%s%n%n", secret.getContentTransformed());
-        System.out.printf("Title:%n%s%n%n", secret.getTitle());
         System.out.printf("Original content:%n%s%n%n", secret.getContentPlain());
-        System.out.printf("URL:%n%s%n%n", secret.getUrl());
+        System.out.printf("%s%n%s%n%n", secret.getTitle(), secret.getUrl());
     }
 }

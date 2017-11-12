@@ -10,8 +10,8 @@ public class HackishTransformer extends Transformer {
     }
 
     public Secret transform(Secret secret) {
-        String phrase = before(secret.getContentPlain());
-        phrase = WordUtils.capitalizeFully(phrase);
+        secret = before(secret);
+        String phrase = WordUtils.capitalizeFully(secret.getContentPlain());
 
         phrase = phrase
                 .replaceAll(" ", "")
