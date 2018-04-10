@@ -1,6 +1,6 @@
 package io.github.mylk.secret.spawn.service.common;
 
-import io.github.mylk.secret.spawn.Exception.SettingNotFoundException;
+import io.github.mylk.secret.spawn.exception.SettingNotFoundException;
 
 import java.io.IOException;
 import java.io.InputStream;

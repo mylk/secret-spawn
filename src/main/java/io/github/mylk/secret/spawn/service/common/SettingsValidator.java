@@ -1,6 +1,6 @@
 package io.github.mylk.secret.spawn.service.common;
 
-import io.github.mylk.secret.spawn.Exception.SettingNotFoundException;
+import io.github.mylk.secret.spawn.exception.SettingNotFoundException;
 import io.github.mylk.secret.spawn.enums.Format;
 import io.github.mylk.secret.spawn.enums.Source;
 import io.github.mylk.secret.spawn.model.Settings;

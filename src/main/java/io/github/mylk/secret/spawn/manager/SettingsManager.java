@@ -1,6 +1,6 @@
-package io.github.mylk.secret.spawn.Manager;
+package io.github.mylk.secret.spawn.manager;
 
-import io.github.mylk.secret.spawn.Exception.SettingNotFoundException;
+import io.github.mylk.secret.spawn.exception.SettingNotFoundException;
 import io.github.mylk.secret.spawn.model.Settings;
 import io.github.mylk.secret.spawn.service.common.SettingsReader;
 import io.github.mylk.secret.spawn.service.common.SettingsValidator;

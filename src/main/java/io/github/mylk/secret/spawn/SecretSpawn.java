@@ -1,9 +1,9 @@
 package io.github.mylk.secret.spawn;
 
-import io.github.mylk.secret.spawn.Exception.SettingNotFoundException;
-import io.github.mylk.secret.spawn.Exception.SourceCallException;
-import io.github.mylk.secret.spawn.Manager.SettingsManager;
-import io.github.mylk.secret.spawn.Manager.SpawnManager;
+import io.github.mylk.secret.spawn.exception.SettingNotFoundException;
+import io.github.mylk.secret.spawn.exception.SourceCallException;
+import io.github.mylk.secret.spawn.manager.SettingsManager;
+import io.github.mylk.secret.spawn.manager.SpawnManager;
 import io.github.mylk.secret.spawn.model.Settings;
 import io.github.mylk.secret.spawn.model.Secret;
 import org.apache.commons.cli.HelpFormatter;

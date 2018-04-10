@@ -1,6 +1,6 @@
-package io.github.mylk.secret.spawn.Manager;
+package io.github.mylk.secret.spawn.manager;
 
-import io.github.mylk.secret.spawn.Exception.SourceCallException;
+import io.github.mylk.secret.spawn.exception.SourceCallException;
 import io.github.mylk.secret.spawn.model.Secret;
 import io.github.mylk.secret.spawn.model.Settings;
 import io.github.mylk.secret.spawn.service.client.Rest;
