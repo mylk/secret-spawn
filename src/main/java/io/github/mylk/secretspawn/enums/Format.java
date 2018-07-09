@@ -1,4 +1,4 @@
-package io.github.mylk.secret.spawn.enums;
+package io.github.mylk.secretspawn.enums;
 
 public enum Format {
     SIMPLE,

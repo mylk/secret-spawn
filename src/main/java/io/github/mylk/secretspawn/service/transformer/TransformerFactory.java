@@ -1,7 +1,7 @@
-package io.github.mylk.secret.spawn.service.transformer;
+package io.github.mylk.secretspawn.service.transformer;
 
-import io.github.mylk.secret.spawn.enums.Format;
-import io.github.mylk.secret.spawn.model.Settings;
+import io.github.mylk.secretspawn.enums.Format;
+import io.github.mylk.secretspawn.model.Settings;
 
 public class TransformerFactory {
     private Settings settings;

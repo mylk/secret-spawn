@@ -1,13 +1,13 @@
-package io.github.mylk.secret.spawn.manager;
+package io.github.mylk.secretspawn.manager;
 
-import io.github.mylk.secret.spawn.exception.SourceCallException;
-import io.github.mylk.secret.spawn.model.Secret;
-import io.github.mylk.secret.spawn.model.Settings;
-import io.github.mylk.secret.spawn.service.client.Rest;
-import io.github.mylk.secret.spawn.service.parser.Parser;
-import io.github.mylk.secret.spawn.service.parser.ParserFactory;
-import io.github.mylk.secret.spawn.service.transformer.Transformer;
-import io.github.mylk.secret.spawn.service.transformer.TransformerFactory;
+import io.github.mylk.secretspawn.exception.SourceCallException;
+import io.github.mylk.secretspawn.model.Secret;
+import io.github.mylk.secretspawn.model.Settings;
+import io.github.mylk.secretspawn.service.client.Rest;
+import io.github.mylk.secretspawn.service.parser.Parser;
+import io.github.mylk.secretspawn.service.parser.ParserFactory;
+import io.github.mylk.secretspawn.service.transformer.Transformer;
+import io.github.mylk.secretspawn.service.transformer.TransformerFactory;
 
 public class SpawnManager {
     Settings settings;

@@ -1,4 +1,4 @@
-package io.github.mylk.secret.spawn.model;
+package io.github.mylk.secretspawn.model;
 
 public class Secret {
     private String title;

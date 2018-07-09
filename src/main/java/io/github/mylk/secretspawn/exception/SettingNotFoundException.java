@@ -1,4 +1,4 @@
-package io.github.mylk.secret.spawn.exception;
+package io.github.mylk.secretspawn.exception;
 
 public class SettingNotFoundException extends Exception {
     public SettingNotFoundException(Exception ex) {

@@ -1,7 +1,7 @@
-package io.github.mylk.secret.spawn.service.parser;
+package io.github.mylk.secretspawn.service.parser;
 
-import io.github.mylk.secret.spawn.enums.Source;
-import io.github.mylk.secret.spawn.model.Settings;
+import io.github.mylk.secretspawn.enums.Source;
+import io.github.mylk.secretspawn.model.Settings;
 
 public class ParserFactory {
     private Settings settings;

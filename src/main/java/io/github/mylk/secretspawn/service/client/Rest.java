@@ -1,4 +1,4 @@
-package io.github.mylk.secret.spawn.service.client;
+package io.github.mylk.secretspawn.service.client;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

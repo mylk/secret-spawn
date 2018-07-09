@@ -1,8 +1,8 @@
-package io.github.mylk.secret.spawn.service.parser;
+package io.github.mylk.secretspawn.service.parser;
 
 import org.json.*;
 import java.util.Iterator;
-import io.github.mylk.secret.spawn.model.Secret;
+import io.github.mylk.secretspawn.model.Secret;
 
 public class WikipediaParser implements Parser {
     public Secret parse(String json, Secret secret) {

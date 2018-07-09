@@ -1,4 +1,4 @@
-package io.github.mylk.secret.spawn.exception;
+package io.github.mylk.secretspawn.exception;
 
 public class SourceCallException extends Exception {
     public SourceCallException(Exception ex) {

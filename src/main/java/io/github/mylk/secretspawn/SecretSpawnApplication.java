@@ -1,16 +1,16 @@
-package io.github.mylk.secret.spawn;
+package io.github.mylk.secretspawn;
 
-import io.github.mylk.secret.spawn.exception.SettingNotFoundException;
-import io.github.mylk.secret.spawn.exception.SourceCallException;
-import io.github.mylk.secret.spawn.manager.SettingsManager;
-import io.github.mylk.secret.spawn.manager.SpawnManager;
-import io.github.mylk.secret.spawn.model.Settings;
-import io.github.mylk.secret.spawn.model.Secret;
+import io.github.mylk.secretspawn.exception.SettingNotFoundException;
+import io.github.mylk.secretspawn.exception.SourceCallException;
+import io.github.mylk.secretspawn.manager.SettingsManager;
+import io.github.mylk.secretspawn.manager.SpawnManager;
+import io.github.mylk.secretspawn.model.Settings;
+import io.github.mylk.secretspawn.model.Secret;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.NotImplementedException;
 
-public class SecretSpawn {
+public class SecretSpawnApplication {
     public static void main(String[] args) {
         SettingsManager settingsManager = new SettingsManager();
         settingsManager.defineOptions();

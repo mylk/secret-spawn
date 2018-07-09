@@ -1,9 +1,9 @@
-package io.github.mylk.secret.spawn.service.common;
+package io.github.mylk.secretspawn.service.common;
 
-import io.github.mylk.secret.spawn.exception.SettingNotFoundException;
-import io.github.mylk.secret.spawn.enums.Format;
-import io.github.mylk.secret.spawn.enums.Source;
-import io.github.mylk.secret.spawn.model.Settings;
+import io.github.mylk.secretspawn.exception.SettingNotFoundException;
+import io.github.mylk.secretspawn.enums.Format;
+import io.github.mylk.secretspawn.enums.Source;
+import io.github.mylk.secretspawn.model.Settings;
 import org.apache.commons.lang3.NotImplementedException;
 
 public class SettingsValidator {

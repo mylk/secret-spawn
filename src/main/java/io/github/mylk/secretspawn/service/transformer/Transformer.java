@@ -1,7 +1,7 @@
-package io.github.mylk.secret.spawn.service.transformer;
+package io.github.mylk.secretspawn.service.transformer;
 
-import io.github.mylk.secret.spawn.model.Secret;
-import io.github.mylk.secret.spawn.model.Settings;
+import io.github.mylk.secretspawn.model.Secret;
+import io.github.mylk.secretspawn.model.Settings;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

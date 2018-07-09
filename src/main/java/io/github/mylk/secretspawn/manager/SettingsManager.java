@@ -1,9 +1,9 @@
-package io.github.mylk.secret.spawn.manager;
+package io.github.mylk.secretspawn.manager;
 
-import io.github.mylk.secret.spawn.exception.SettingNotFoundException;
-import io.github.mylk.secret.spawn.model.Settings;
-import io.github.mylk.secret.spawn.service.common.SettingsReader;
-import io.github.mylk.secret.spawn.service.common.SettingsValidator;
+import io.github.mylk.secretspawn.exception.SettingNotFoundException;
+import io.github.mylk.secretspawn.model.Settings;
+import io.github.mylk.secretspawn.service.common.SettingsReader;
+import io.github.mylk.secretspawn.service.common.SettingsValidator;
 import org.apache.commons.cli.*;
 import org.apache.commons.lang3.NotImplementedException;
 

@@ -34,13 +34,13 @@ The rulebook was the go-to password-setting guide for federal agencies, universi
 ## Build
 
 ```
-./gradlew build
+./gradlew clean build
 ```
 
 ## Run
 
 ```
-java -jar build/libs/secret-spawn-all.jar
+java -jar build/libs/secretspawn-all.jar
 ```
 
 ## Options
