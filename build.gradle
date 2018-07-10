@@ -10,11 +10,13 @@ buildscript {
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'maven'
 
 sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 mainClassName = 'io.github.mylk.secretspawn.SecretSpawnApplication'
+group = 'com.github.mylk'
 
 repositories {
     mavenCentral()
@@ -26,15 +28,20 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.6'
 }
 
-jar {
+configurations.archives.with {
+    artifacts.remove artifacts.find { it.archiveTask.is distZip }
+    artifacts.remove artifacts.find { it.archiveTask.is distTar }
+}
+
+shadowJar {
     baseName = 'secret-spawn'
-    version =  '0.1'
+    version = '0.1'
     manifest {
         attributes(
-            'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-            'Main-Class': 'io.github.mylk.secret.spawn.SecretSpawn'
+            'Main-Class': 'io.github.mylk.secretspawn.SecretSpawnApplication'
         )
     }
+    archiveName = "secretspawn.jar"
 }
 
 run {

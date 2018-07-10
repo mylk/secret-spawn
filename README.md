@@ -40,7 +40,7 @@ The rulebook was the go-to password-setting guide for federal agencies, universi
 ## Run
 
 ```
-java -jar build/libs/secretspawn-all.jar
+java -jar build/libs/secretspawn.jar
 ```
 
 ## Options
