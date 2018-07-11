@@ -3,7 +3,7 @@ package io.github.mylk.secretspawn;
 import io.github.mylk.secretspawn.exception.SettingNotFoundException;
 import io.github.mylk.secretspawn.exception.SourceCallException;
 import io.github.mylk.secretspawn.manager.SettingsManager;
-import io.github.mylk.secretspawn.manager.SpawnManager;
+import io.github.mylk.secretspawn.manager.SecretManager;
 import io.github.mylk.secretspawn.model.Settings;
 import io.github.mylk.secretspawn.model.Secret;
 import org.apache.commons.cli.HelpFormatter;
@@ -32,11 +32,11 @@ public class SecretSpawnApplication {
             System.exit(1);
         }
 
-        SpawnManager spawnManager = new SpawnManager();
-        spawnManager.setSettings(settings);
+        SecretManager secretManager = new SecretManager();
+        secretManager.setSettings(settings);
         Secret secret = new Secret();
         try {
-            secret = spawnManager.spawn();
+            secret = secretManager.spawn();
         } catch (SourceCallException ex) {
             System.out.println(ex.getMessage());
             System.exit(1);

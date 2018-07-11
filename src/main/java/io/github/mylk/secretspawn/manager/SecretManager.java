@@ -9,7 +9,7 @@ import io.github.mylk.secretspawn.service.parser.ParserFactory;
 import io.github.mylk.secretspawn.service.transformer.Transformer;
 import io.github.mylk.secretspawn.service.transformer.TransformerFactory;
 
-public class SpawnManager {
+public class SecretManager {
     Settings settings;
 
     public Secret spawn() throws SourceCallException {
